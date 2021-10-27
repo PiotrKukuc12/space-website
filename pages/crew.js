@@ -13,6 +13,7 @@ import Image from 'next/image';
 import CrewButton from '../components/crew/buttons';
 import { douglas, mark, victor, ano } from '../components/crew/crewText';
 import HeadingNumb from '../components/headingNumb';
+import { PlanetAnimation, Section } from '../components/sectionAnimation';
 
 const Crew = () => {
   const [astronaut, setAstronaut] = useState(1);
@@ -50,13 +51,13 @@ const Crew = () => {
   const handleWidth = () => {
     switch (astronaut) {
       case 1:
-        return {base: '215px', sm:'290px', lg:'370px'};
+        return { base: '215px', sm: '290px', lg: '370px' };
       case 2:
-        return {base:'199px', lg:'340px'};
+        return { base: '199px', lg: '340px' };
       case 3:
-        return {base:'250px', lg:'430px'};
+        return { base: '250px', lg: '430px' };
       case 4:
-        return {base:'280px', lg:'480px'};
+        return { base: '280px', lg: '480px' };
       default:
         return;
     }
@@ -64,23 +65,43 @@ const Crew = () => {
 
   return (
     <Layout title="crew" desktop={desktop} tablet={tablet} mobile={mobile}>
-     <HeadingNumb number='02'>PICK YOUR CREW</HeadingNumb>
-      <Stack align={{base: "center"}} direction={{ base: 'column-reverse', sm:'column', lg:'row' }}>
-        <Stack my={30} align="center" direction={{ base: 'column-reverse', sm: 'column' }}>
-          <Stack align={{base:"center", lg:"baseline"}}>
-            <Text fontSize="2xl" textTransform='uppercase' color="#686868">
+      <HeadingNumb number="02">PICK YOUR CREW</HeadingNumb>
+      <Stack
+        align={{ base: 'center' }}
+        direction={{ base: 'column-reverse', sm: 'column', lg: 'row' }}
+      >
+        <Stack
+          my={30}
+          align="center"
+          direction={{ base: 'column-reverse', sm: 'column' }}
+        >
+          <Stack align={{ base: 'center', lg: 'baseline' }}>
+            <Section>
+              <Text fontSize="2xl" textTransform="uppercase" color="#686868">
                 {handleText().spec}
-            </Text>
-            <H4>{handleText().name}</H4>
-            <Text fontSize="xl" color="white" pb={5} px={{base: '5', sm:'20', lg:'0'}} pr={{ base:'0',lg:'20%'}} textAlign={{base: "center", lg:'left'}}>
-              {handleText().desc}
-            </Text>
+              </Text>
+            </Section>
+            <Section delay={0.1}>
+              <H4>{handleText().name}</H4>
+            </Section>
+            <Section delay={0.2}>
+              <Text
+                fontSize="xl"
+                color="white"
+                pb={5}
+                px={{ base: '5', sm: '20', lg: '0' }}
+                pr={{ base: '0', lg: '20%' }}
+                textAlign={{ base: 'center', lg: 'left' }}
+              >
+                {handleText().desc}
+              </Text>
+            </Section>
           </Stack>
           <HStack
             color="white"
             width={{ base: '70%', sm: '45%', md: '30%', lg: '30%' }}
             justifyContent={{ base: 'space-around', lg: 'space-between' }}
-            pt={{base:'0', lg:'20'}}
+            pt={{ base: '0', lg: '20' }}
           >
             <CrewButton handleAstronaut={() => setAstronaut(1)} />
             <CrewButton handleAstronaut={() => setAstronaut(2)} />
@@ -89,16 +110,14 @@ const Crew = () => {
           </HStack>
         </Stack>
         <Stack w="90%" align="center">
-          <Box
-            width={handleWidth()}
-            height={{base:'285px', lg: '495px'}}
-          >
-            <Image src={handleSrc()} />
-          </Box>
-          <Divider display={{base: 'block', sm:'none', lg:'block'}} />
+          <PlanetAnimation>
+            <Box width={handleWidth()} height={{ base: '285px', lg: '495px' }}>
+              <Image src={handleSrc()} />
+            </Box>
+          </PlanetAnimation>
+          <Divider display={{ base: 'block', sm: 'none', lg: 'block' }} />
         </Stack>
       </Stack>
-
     </Layout>
   );
 };

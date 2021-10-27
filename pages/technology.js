@@ -9,50 +9,51 @@ import HeadingNumb from '../components/headingNumb';
 import img1 from '../public/images/technology/image-launch-vehicle-landscape.jpg';
 import img2 from '../public/images/technology/image-space-capsule-landscape.jpg';
 import img3 from '../public/images/technology/image-spaceport-landscape.jpg';
-import img1Higher from '../public/images/technology/image-launch-vehicle-portrait.jpg'
-import img2Higher from '../public/images/technology/image-space-capsule-portrait.jpg'
-import img3Higher from '../public/images/technology/image-spaceport-portrait.jpg'
+import img1Higher from '../public/images/technology/image-launch-vehicle-portrait.jpg';
+import img2Higher from '../public/images/technology/image-space-capsule-portrait.jpg';
+import img3Higher from '../public/images/technology/image-spaceport-portrait.jpg';
 import TechButton from '../components/technology/buttons';
 
 import { launch, capsule, port } from '../components/technology/text';
+import { PlanetAnimation, Section } from '../components/sectionAnimation';
 
 const Technology = () => {
   const [img, setImg] = useState(1);
-  const [windowSize, setWindowSize] = useState(null)
+  const [windowSize, setWindowSize] = useState(null);
 
   useEffect(() => {
-      const handleResize = () => {
-          setWindowSize(window.innerWidth)
-      }
-  
-      window.addEventListener('resize', handleResize)
-      window.addEventListener('load', handleResize)
-  
-      return () => window.removeEventListener('resize', handleResize)
-  }, [])
+    const handleResize = () => {
+      setWindowSize(window.innerWidth);
+    };
 
-  
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('load', handleResize);
 
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('load', handleResize);
+    };
+  }, []);
 
   const handleSrc = () => {
     switch (img) {
       case 1:
-          if(windowSize > 992) {
-              return img1Higher;
-          } else {
-              return img1
-          }
-      case 2:
-        if(windowSize > 992) {
-            return img2Higher;
+        if (windowSize > 992) {
+          return img1Higher;
         } else {
-            return img2
+          return img1;
+        }
+      case 2:
+        if (windowSize > 992) {
+          return img2Higher;
+        } else {
+          return img2;
         }
       case 3:
-        if(windowSize > 992) {
-            return img3Higher;
+        if (windowSize > 992) {
+          return img3Higher;
         } else {
-            return img3
+          return img3;
         }
       default:
         return;
@@ -80,10 +81,17 @@ const Technology = () => {
       mobile={mobile}
     >
       <HeadingNumb number="03">SPACE LAUNCH 101</HeadingNumb>
-      <Stack w='100%' align='center' direction={{base:"column",lg:"row-reverse"}} justifyContent="space-between">
-        <Box  width={{base:"100%",mg:'500px', lg:'600px'}} height="100%">
-          <Image src={handleSrc()} />
-        </Box>
+      <Stack
+        w="100%"
+        align="center"
+        direction={{ base: 'column', lg: 'row-reverse' }}
+        justifyContent="space-between"
+      >
+        <PlanetAnimation>
+          <Box width={{ base: '100%', mg: '500px', lg: '600px' }} height="100%">
+            <Image src={handleSrc()} />
+          </Box>
+        </PlanetAnimation>
         <Stack
           align={{ base: 'center' }}
           direction={{ base: 'column', lg: 'row' }}
@@ -96,20 +104,27 @@ const Technology = () => {
             justifyContent={{ base: 'space-around', lg: 'space-between' }}
             pt={{ base: '0', lg: '20' }}
           >
-            <TechButton state={img} num={1} func={() => setImg(1)}>
-              1
-            </TechButton>
-            <TechButton state={img} num={2} func={() => setImg(2)}>
-              2
-            </TechButton>
-            <TechButton state={img} num={3} func={() => setImg(3)}>
-              3
-            </TechButton>
+            <Section>
+              <TechButton state={img} num={1} func={() => setImg(1)}>
+                1
+              </TechButton>
+            </Section>
+            <Section delay={0.2}>
+              <TechButton state={img} num={2} func={() => setImg(2)}>
+                2
+              </TechButton>
+            </Section>
+            <Section delay={0.4}>
+              <TechButton state={img} num={3} func={() => setImg(3)}>
+                3
+              </TechButton>
+            </Section>
           </Stack>
           <Stack
             width={{ base: '', lg: '400px' }}
             align={{ base: 'center', lg: 'baseline' }}
           >
+          <Section>
             <Text
               pt={5}
               color="gray.200"
@@ -118,9 +133,14 @@ const Technology = () => {
             >
               The terminology...
             </Text>
+          </Section>
+          <Section delay={0.1}>
             <Text color="white" fontSize="5xl" textTransform="uppercase">
               {handleText().name}
             </Text>
+          </Section>
+          <Section delay={0.2}>
+
             <Text
               pt={5}
               fontSize="xl"
@@ -130,6 +150,7 @@ const Technology = () => {
             >
               {handleText().desc}
             </Text>
+          </Section>
           </Stack>
         </Stack>
       </Stack>

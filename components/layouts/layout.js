@@ -1,6 +1,5 @@
 import { Box, Container } from '@chakra-ui/layout';
 import Head from 'next/head';
-import Navbar from '../navbar';
 
 const Layout = ({ children,desktop, tablet, mobile, title }) => {
   return (
@@ -12,7 +11,6 @@ const Layout = ({ children,desktop, tablet, mobile, title }) => {
         </Head>
 
 
-        <Navbar />
 
 
         <Container p={0} maxW='container.xl' position='relative'>

@@ -11,6 +11,24 @@ const RoundedButton = styled.button`
   font-weight: 600;
   color: black;
   letter-spacing: 2px;
+  cursor: pointer;
+  animation: hamburger_plus 4s ease infinite;
+  transition: all 1s ease;
+  
+  @keyframes hamburger_plus {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+
+&:hover{
+  background-color: lightgray;
+}
 
 
   @media only screen and (max-width: 480px) {
@@ -23,17 +41,7 @@ const RoundedButton = styled.button`
 
 
   &:hover{
-    animation: hamburger_plus 3s ease infinite;
-  }
-  @keyframes hamburger_plus {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1.4);
-  }
+
 }
 `;
 
